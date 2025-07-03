@@ -37,15 +37,7 @@ public class Adherent {
     @Column(nullable = false)
     private TypeAdherent type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatutAdherent statut;
-
     public enum TypeAdherent {
         ETUDIANT, PERSONNEL, PROFESSEUR, ANONYME
-    }
-
-    public enum StatutAdherent {
-        ACTIF, SUSPENDU
     }
 }
