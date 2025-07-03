@@ -24,12 +24,4 @@ public class Penalite {
     private LocalDate dateEmission;
 
     private LocalDate datePaiement;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatutPenalite statut;
-
-    public enum StatutPenalite {
-        IMPAYEE, PAYEE
-    }
 }

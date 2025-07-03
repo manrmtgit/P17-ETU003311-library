@@ -24,12 +24,4 @@ public class Reservation {
     private LocalDate dateDemande;
 
     private LocalDate dateExpiration;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatutReservation statut;
-
-    public enum StatutReservation {
-        EN_ATTENTE, ANNULEE, HONOREE
-    }
 }
