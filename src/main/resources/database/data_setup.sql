@@ -17,10 +17,9 @@ CREATE TABLE livre
 CREATE TABLE exemplaire
 (
     id               BIGSERIAL PRIMARY KEY,
-    livre_id         BIGINT      NOT NULL,
-    statut           VARCHAR(50) NOT NULL CHECK (statut IN ('DISPONIBLE', 'PRETE', 'RESERVE', 'EN_REPARATION')),
+    livre_id         BIGINT NOT NULL,
     localisation     VARCHAR(100),
-    date_acquisition DATE        NOT NULL,
+    date_acquisition DATE   NOT NULL,
     prix             DECIMAL(10, 2),
     FOREIGN KEY (livre_id) REFERENCES livre (id)
 );
@@ -35,8 +34,7 @@ CREATE TABLE adherent
     adresse             TEXT,
     date_inscription    DATE                NOT NULL,
     date_fin_abonnement DATE                NOT NULL,
-    type                VARCHAR(50)         NOT NULL CHECK (type IN ('ETUDIANT', 'PERSONNEL', 'PROFESSEUR', 'ANONYME')),
-    statut              VARCHAR(50)         NOT NULL CHECK (statut IN ('ACTIF', 'SUSPENDU'))
+    type                VARCHAR(50)         NOT NULL CHECK (type IN ('ETUDIANT', 'PERSONNEL', 'PROFESSEUR', 'ANONYME'))
 );
 
 CREATE TABLE pret
@@ -48,7 +46,6 @@ CREATE TABLE pret
     date_fin_prevue       DATE        NOT NULL,
     date_retour_effective DATE,
     type                  VARCHAR(50) NOT NULL CHECK (type IN ('DOMICILE', 'SUR_PLACE')),
-    statut                VARCHAR(50) NOT NULL CHECK (statut IN ('EN_COURS', 'RETOURNE', 'EN_RETARD')),
     FOREIGN KEY (exemplaire_id) REFERENCES exemplaire (id),
     FOREIGN KEY (adherent_id) REFERENCES adherent (id)
 );
@@ -56,11 +53,10 @@ CREATE TABLE pret
 CREATE TABLE reservation
 (
     id              BIGSERIAL PRIMARY KEY,
-    livre_id        BIGINT      NOT NULL,
-    adherent_id     BIGINT      NOT NULL,
-    date_demande    DATE        NOT NULL,
+    livre_id        BIGINT NOT NULL,
+    adherent_id     BIGINT NOT NULL,
+    date_demande    DATE   NOT NULL,
     date_expiration DATE,
-    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('EN_ATTENTE', 'ANNULEE', 'HONOREE')),
     FOREIGN KEY (livre_id) REFERENCES livre (id),
     FOREIGN KEY (adherent_id) REFERENCES adherent (id)
 );
@@ -72,7 +68,6 @@ CREATE TABLE penalite
     montant       DECIMAL(10, 2) NOT NULL,
     date_emission DATE           NOT NULL,
     date_paiement DATE,
-    statut        VARCHAR(50)    NOT NULL CHECK (statut IN ('IMPAYEE', 'PAYEE')),
     FOREIGN KEY (pret_id) REFERENCES pret (id)
 );
 
@@ -80,4 +75,49 @@ CREATE TABLE jour_ferie
 (
     date        DATE PRIMARY KEY,
     description VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE exemplaire_statut
+(
+    id              BIGSERIAL PRIMARY KEY,
+    exemplaire_id   BIGINT      NOT NULL,
+    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('DISPONIBLE', 'PRETE', 'RESERVE', 'EN_REPARATION')),
+    date_changement TIMESTAMP   NOT NULL,
+    FOREIGN KEY (exemplaire_id) REFERENCES exemplaire (id)
+);
+
+CREATE TABLE adherent_statut
+(
+    id              BIGSERIAL PRIMARY KEY,
+    adherent_id     BIGINT      NOT NULL,
+    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('ACTIF', 'SUSPENDU')),
+    date_changement TIMESTAMP   NOT NULL,
+    FOREIGN KEY (adherent_id) REFERENCES adherent (id)
+);
+
+CREATE TABLE pret_statut
+(
+    id              BIGSERIAL PRIMARY KEY,
+    pret_id         BIGINT      NOT NULL,
+    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('EN_COURS', 'RETOURNE', 'EN_RETARD')),
+    date_changement TIMESTAMP   NOT NULL,
+    FOREIGN KEY (pret_id) REFERENCES pret (id)
+);
+
+CREATE TABLE reservation_statut
+(
+    id              BIGSERIAL PRIMARY KEY,
+    reservation_id  BIGINT      NOT NULL,
+    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('EN_ATTENTE', 'ANNULEE', 'HONOREE')),
+    date_changement TIMESTAMP   NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservation (id)
+);
+
+CREATE TABLE penalite_statut
+(
+    id              BIGSERIAL PRIMARY KEY,
+    penalite_id     BIGINT      NOT NULL,
+    statut          VARCHAR(50) NOT NULL CHECK (statut IN ('IMPAYEE', 'PAYEE')),
+    date_changement TIMESTAMP   NOT NULL,
+    FOREIGN KEY (penalite_id) REFERENCES penalite (id)
 );

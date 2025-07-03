@@ -2,13 +2,12 @@ package com.manoa.p17etu003311library.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "penalite")
-public class Penalite {
+@Table(name = "pret_statut")
+public class PretStatut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,11 +16,14 @@ public class Penalite {
     @JoinColumn(name = "pret_id", nullable = false)
     private Pret pret;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Double montant;
+    private StatutPret statut;
 
     @Column(nullable = false)
-    private LocalDate dateEmission;
+    private LocalDateTime dateChangement;
 
-    private LocalDate datePaiement;
+    public enum StatutPret {
+        EN_COURS, RETOURNE, EN_RETARD
+    }
 }

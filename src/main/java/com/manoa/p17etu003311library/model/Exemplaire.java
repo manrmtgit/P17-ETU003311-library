@@ -2,7 +2,6 @@ package com.manoa.p17etu003311library.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Data
@@ -17,10 +16,6 @@ public class Exemplaire {
     @JoinColumn(name = "livre_id", nullable = false)
     private Livre livre;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatutExemplaire statut;
-
     private String localisation;
 
     @Column(nullable = false)
@@ -28,7 +23,6 @@ public class Exemplaire {
 
     private Double prix;
 
-    public enum StatutExemplaire {
-        DISPONIBLE, PRETE, RESERVE, EN_REPARATION
+    public Exemplaire() {
     }
 }
