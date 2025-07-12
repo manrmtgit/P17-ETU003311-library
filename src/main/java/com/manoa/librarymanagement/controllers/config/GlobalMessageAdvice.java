@@ -1,4 +1,4 @@
-package com.manoa.librarymanagement.controllers.init;
+package com.manoa.librarymanagement.controllers.config;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
