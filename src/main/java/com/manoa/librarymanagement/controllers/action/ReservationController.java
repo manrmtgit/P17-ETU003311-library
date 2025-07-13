@@ -7,6 +7,8 @@ import com.manoa.librarymanagement.models.livre.Livre;
 import com.manoa.librarymanagement.models.statut.StatutReservation;
 import com.manoa.librarymanagement.models.utilisateur.Adherent;
 import com.manoa.librarymanagement.models.utilisateur.Utilisateur;
+import com.manoa.librarymanagement.repositories.action.AbonnementRepository;
+import com.manoa.librarymanagement.repositories.action.PenaliteRepository;
 import com.manoa.librarymanagement.repositories.action.ReservationRepository;
 import com.manoa.librarymanagement.repositories.livre.ExemplaireRepository;
 import com.manoa.librarymanagement.repositories.statut.StatutReservationRepository;
@@ -21,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,12 +31,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReservationController {
 
-    private final AdherentRepository adherentRepository;
     private final ExemplaireRepository exemplaireRepository;
     private final StatutReservationRepository statutRepository;
     private final ReservationRepository reservationRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final ReservationService reservationService;
+    private final AbonnementRepository abonnementRepository;
+    private final PenaliteRepository penaliteRepository;
 
     @GetMapping("/ajouter/{exemplaireId}")
     public String reserver(@PathVariable Long exemplaireId,
@@ -68,4 +72,38 @@ public class ReservationController {
         reservationRepository.save(r);
         return "redirect:/user/dashboard";
     }
+
+
+    @GetMapping("/user/dashboard")
+    public String userDashboard(@AuthenticationPrincipal User user, Model model) {
+        Optional<Utilisateur> u = utilisateurRepository.findByUsername(user.getUsername());
+        if (u.isEmpty()) return "redirect:/home";
+
+        Adherent adherent = u.get().getAdherent();
+        List<Reservation> reservations = reservationRepository.findAll();
+
+        long count = reservations.stream()
+                .filter(r -> r.getAdherent().equals(adherent) && r.getStatut().getStatut() == StatutReservation.DescriptionStatut.EN_ATTENTE)
+                .count();
+
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("quotaPret", adherent.getProfil().getQuotaPret());
+        model.addAttribute("quotaReservation", adherent.getProfil().getQuotaReservation());
+        model.addAttribute("reservationsActives", count);
+
+        boolean abonne = abonnementRepository.findAll().stream()
+                .anyMatch(a -> a.getAdherent().equals(adherent) &&
+                        a.getDateDebut().isBefore(LocalDate.now()) &&
+                        a.getDateFin().isAfter(LocalDate.now()));
+
+        boolean penalise = penaliteRepository.findAll().stream()
+                .anyMatch(p -> p.getAdherent().equals(adherent) && p.getDateFin().isAfter(LocalDate.now()));
+
+        model.addAttribute("statutAbonnement", abonne ? "Actif" : "Inactif");
+        model.addAttribute("statutPenalite", penalise ? "Pénalisé" : "Aucun");
+        model.addAttribute("exemplaires", exemplaireRepository.findAll());
+
+        return "dashboard/user-dashboard";
+    }
 }
+
