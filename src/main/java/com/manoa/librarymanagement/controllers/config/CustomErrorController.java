@@ -1,3 +1,4 @@
+/*
 package com.manoa.librarymanagement.controllers.config;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -23,4 +24,4 @@ public class CustomErrorController implements ErrorController {
     public String defaultError() {
         return "error/default";
     }
-}
+}*/

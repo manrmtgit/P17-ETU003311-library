@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="mg">
+<body>
+<div th:replace="fragement/_menu :: menu"></div>
+<h2>Statistiques</h2>
+<ul>
+    <li>Nombre d'adhérents : <span th:text="${nbAdherents}"></span></li>
+    <li>Nombre de prêts : <span th:text="${nbPrets}"></span></li>
+    <li>Nombre de réservations : <span th:text="${nbReservations}"></span></li>
+    <li>Nombre de pénalités actives : <span th:text="${nbPenalites}"></span></li>
+</ul>
+</body>
+</html>
