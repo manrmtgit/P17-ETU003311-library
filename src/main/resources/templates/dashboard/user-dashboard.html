@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="mg">
+<head>
+    <title>User Dashboard</title>
+</head>
+<body>
+<h2>Bienvenue, <span th:text="${username}"></span> (ADHERENT)</h2>
+<div th:replace="fragement/_menu :: menu"></div>
+<p>Page d'accueil pour les adhérents.</p>
+</body>
+</html>

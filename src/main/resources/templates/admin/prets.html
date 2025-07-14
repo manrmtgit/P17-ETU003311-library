@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="mg">
+<body>
+<div th:replace="fragement/_menu :: menu"></div>
+<h2>Liste des prêts</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Adhérent</th>
+        <th>Exemplaire</th>
+        <th>Date prêt</th>
+        <th>Date retour</th>
+    </tr>
+    <tr th:each="pret : ${prets}">
+        <td th:text="${pret.id}"></td>
+        <td th:text="${pret.adherent.nom}"></td>
+        <td th:text="${pret.exemplaire.codeBarre}"></td>
+        <td th:text="${pret.datePret}"></td>
+        <td th:text="${pret.dateRetourPrevue}"></td>
+    </tr>
+</table>
+</body>
+</html>

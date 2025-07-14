@@ -1,4 +1,4 @@
-package com.manoa.librarymanagement.controllers.init;
+package com.manoa.librarymanagement.controllers.config;
 
 
 import com.manoa.librarymanagement.models.utilisateur.Utilisateur;
