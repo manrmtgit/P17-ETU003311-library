@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:replace="_menu :: menu"></div>
+<h2>Mes prêts</h2>
+<table border="1">
+    <tr>
+        <th>Livre</th>
+        <th>Date retour</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="pret : ${prets}">
+        <td th:text="${pret.exemplaire.livre.titre}"></td>
+        <td th:text="${pret.dateRetourPrevue}"></td>
+        <td>
+            <form th:action="@{'/user/prolongements/ajouter/' + ${pret.id}}" method="post">
+                <button type="submit">Prolonger</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
