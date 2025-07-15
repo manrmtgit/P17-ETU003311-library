@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="mg">
+<body>
+<div th:replace="fragement/_menu :: menu"></div>
+<h2>Jours Fériés</h2>
+<form th:action="@{/admin/jours-feries/ajouter}" method="post" th:object="${nouveauJour}">
+    <label>Date :</label>
+    <input type="date" th:field="*{date}" required/>
+
+    <label>Description :</label>
+    <input type="text" th:field="*{description}" required/>
+    <button type="submit">Ajouter</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="j : ${jours}">
+        <td th:text="${j.date}"></td>
+        <td th:text="${j.description}"></td>
+        <td>
+            <form th:action="@{'/admin/jours-feries/supprimer/' + ${j.id}}" method="post">
+                <button type="submit">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

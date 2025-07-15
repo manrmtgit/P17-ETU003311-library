@@ -1,0 +1,1 @@
+# endpoint web api en json id livre -> info -> liste exemplaires -> disponiblites exemplaires 1
