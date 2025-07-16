@@ -1,0 +1,45 @@
+gestion de bibliotheque
+. entite principale
+	- livre
+	- exemplaire
+	- adherent
+	- pret
+	- reservation
+	- penalite
+	- prolongement
+	- jour ferie
+. but
+	- application web
+	- tech: java, spring boot (spring web,lombok,spring data jpa,postgresql driver,
+				   rest repositories,spring security,thymeleaf,oauth2 client,spring web services),
+ 		maven, postgresql
+. fonctionnalite de l'app
+	- preter un livre
+	- reserver un livre
+	- prolonger un pret
+	- rendre un livre
+	- penaliser un adherent
+	- gerer jour ferie
+	- gerer un utilisateur (bibliothecaire, adherent)
+	- inserer adherent
+	- back office - front office
+. condition
+	- un adherent doit avoir un abonnement en cours du debut a la fin du pret pouvoir preter un livre selon son quota
+	- un adherent ne doit pas etre penaliser
+	- un adherent a l'age requis pour un livre
+	- chaque adherent a sa propre profil
+	- le quota est defini par profil d'un adherent
+	- la valeur du jour de penalite est defini par profil
+	- un adherent peut preter tant que sans quota n'est pas atteint
+	- un adherent peut toujours reserver un livre mais il n'aura pas de reservation accepte plus que le quota
+	- un adherent ne peut faire qu'un seul prolongement pour un seul pret 
+	- un livre ne peut etre rendu ni preter au moment d'un jour ferie
+	- si le moment de la remise du livre est au moment d'un jour ferie le bibliothecaire decide si l'adherent le rend 1 jour avant ou apres la date
+	- la penalite n'est pas un question d'argent mais une suspension de pret meme s'il est abonne
+	- la penalite est une suspension de pret pendant x_jours le jour j ou l'adherent retourne le livre en retard
+	- si un adherent n'est plus abonne  il peut entre dans l'application mais en lecture seul donc il ne rien faire
+	- si un adherent ne rend pas le livre a temps il ne peut plus reserver meme s'il a encore des quota, et meme s'il est encore abonne
+	- une reservation sera devenue un pret le jour j
+	- le prolongement doit etre enregistrer dans la base
+en etudiant ces concepts on va faire la conception de la base de donnee avec toutes ces regles j'ajouterai d'autres plus tard mais pour le moment 
+on va ce concentre sur la base. donc je veux le scripts de toutes les tables necessaires, et donne moi quelque donnees a inserer pour faire des tests.

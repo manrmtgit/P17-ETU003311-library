@@ -1,1 +1,2 @@
 # endpoint web api en json id livre -> info -> liste exemplaires -> disponiblites exemplaires 1
+# numero adherent -> info adherent -> etat -> abonnement -> penalite -> quota

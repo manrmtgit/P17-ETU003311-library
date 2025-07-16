@@ -12,22 +12,20 @@ VALUES (1, 'Le petit prince', 'Antoine de Saint-Exupery', 1943, 8),
 
 -- Profils
 INSERT INTO profil (nom, quota_pret, quota_reservation, jours_penalite)
-VALUES ('Junior', 2, 1, 3),
-       ('Adulte', 5, 3, 5),
-       ('Premium', 10, 5, 2);
+VALUES ('Etudiant', 2, 1, 3),
+       ('Professeur', 5, 3, 5),
+       ('Personnel', 10, 5, 2);
 
 -- Statuts exemplaire
-INSERT INTO statut_exemplaire (description, date_debut, date_fin)
-VALUES ('DISPONIBLE', '2025-01-01', '2025-12-31'),
-       ('PRETE', '2025-01-01', '2025-12-31'),
-       ('RESERVE', '2025-01-01', '2025-12-31');
+INSERT INTO statut_exemplaire (description)
+VALUES ('DISPONIBLE');
 
 -- Exemplaires
 INSERT INTO exemplaire (livre_id, statut_id, code_barre)
 VALUES (1, 1, 'EX001-LPP'),
        (2, 1, 'EX002-PHY'),
        (3, 1, 'EX003-HIS');
-
+/*
 -- Adherents
 INSERT INTO adherent (nom, prenom, email, date_naissance, profil_id)
 VALUES ('Doe', 'John', 'john.doe@email.com', '2000-05-12', 2),
@@ -65,7 +63,7 @@ VALUES (2, 2, 1, '2025-07-05');
 -- Penalite
 INSERT INTO penalite (adherent_id, date_debut, date_fin, motif)
 VALUES (1, '2025-07-16', '2025-07-20', 'retard de retour');
-
+*/
 -- Jour ferie
 INSERT INTO jour_ferie (date, description)
 VALUES ('2025-12-25', 'Noel'),

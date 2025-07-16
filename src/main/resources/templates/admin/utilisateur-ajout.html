@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:replace="fragement/_menu-admin :: menu"></div>
+<h2>Ajouter un utilisateur</h2>
+<form th:action="@{/admin/utilisateurs/ajouter}" method="post">
+    <label>Adhérent :
+        <select name="adherentId" required>
+            <option th:each="a : ${adherents}" th:value="${a.id}" th:text="${a.nom + ' ' + a.prenom}"></option>
+        </select>
+    </label><br>
+    <label>Nom d'utilisateur : <input type="text" name="username" required></label><br>
+    <label>Mot de passe : <input type="password" name="motDePasse" required></label><br>
+    <label>Rôle :
+        <select name="role" required>
+            <option value="ADHERENT">Adhérent</option>
+            <option value="BIBLIOTHECAIRE">Bibliothécaire</option>
+        </select>
+    </label><br>
+    <button type="submit">Ajouter</button>
+</form>
+<a th:href="@{/admin/adherents}">Retour</a>
+</body>
+</html>

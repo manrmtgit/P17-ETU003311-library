@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:replace="fragement/_menu-admin :: menu"></div>
+<h2>Liste des utilisateurs</h2>
+<a th:href="@{/admin/utilisateurs/ajouter}">Ajouter un utilisateur</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Profil</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Etat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${utilisateurs}">
+        <td th:text="${u.adherent.nom}"></td>
+        <td th:text="${u.adherent.prenom}"></td>
+        <td th:text="${u.adherent.email}"></td>
+        <td th:text="${u.adherent.profil != null ? u.adherent.profil.nom : 'Non défini'}"></td>
+        <td th:text="${u.username}"></td>
+        <td th:text="${u.role}"></td>
+        <td th:text="${u.actif}"></td>
+        <td>
+            <a th:href="@{'/admin/adherents/' + ${u.id}}">Voir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

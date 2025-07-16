@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:replace="fragement/_menu-admin :: menu"></div>
+<h2>Détail du prêt</h2>
+<ul>
+    <li>ID : <span th:text="${pret.id}"></span></li>
+    <li>Adhérent : <span th:text="${pret.adherent.nom}"></span></li>
+    <li>Exemplaire : <span th:text="${pret.exemplaire.codeBarre}"></span></li>
+    <li>Date prêt : <span th:text="${pret.datePret}"></span></li>
+    <li>Date retour prévue : <span th:text="${pret.dateRetourPrevue}"></span></li>
+    <li>Date retour effective : <span th:text="${pret.dateRetourEffective}"></span></li>
+    <li>Type de prêt : <span th:text="${pret.typePret}"></span></li>
+</ul>
+<a th:href="@{/admin/prets}">Retour à la liste</a>
+</body>
+</html>

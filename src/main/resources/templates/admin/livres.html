@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Liste des Exemplaires</title>
+</head>
+<body>
+<div th:replace="~{fragement/_menu-admin :: menu}"></div>
+<h2>Liste des Exemplaires</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Année de parution</th>
+        <th>Âge minimum</th>
+        <th>Catégorie</th>
+        <th>Statut</th>
+        <th>Code Bar</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ex : ${exemplaires}">
+        <td th:text="${ex.livre.titre}"></td>
+        <td th:text="${ex.livre.auteur}"></td>
+        <td th:text="${ex.livre.anneeParution}"></td>
+        <td th:text="${ex.livre.ageMinimum}"></td>
+        <td th:text="${ex.livre.categorie.nom}"></td>
+        <td th:text="${ex.statut.description}"></td>
+        <td th:text="${ex.codeBarre}"></td>
+        <td>
+            <a th:href="@{'/admin/exemplaires/' + ${ex.id}}">Voir détail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

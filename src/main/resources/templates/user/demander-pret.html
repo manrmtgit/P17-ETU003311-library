@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:replace="~{fragement/_menu-user :: menu}"></div>
+<h2>Demander un prêt</h2>
+<form th:action="@{/user/prets/nouveau}" method="post">
+    <label for="exemplaireId">Exemplaire :</label>
+    <select name="exemplaireId" id="exemplaireId" required>
+        <option th:each="ex : ${exemplaires}" th:value="${ex.id}" th:text="${ex.codeBarre}"></option>
+    </select>
+    <button type="submit">Demander</button>
+</form>
+<a th:href="@{/user/prets}">Retour à mes prêts</a>
+</body>
+</html>

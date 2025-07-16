@@ -4,28 +4,7 @@
     <title>User Dashboard</title>
 </head>
 <body>
-<div th:replace="fragement/_menu :: menu"></div>
+<div th:replace="~{fragement/_menu-user :: menu}"></div>
 <h2>Bienvenue, <span th:text="${username}"></span> (ADHERENT)</h2>
-<p th:if="${erreur}" style="color:red">[[${erreur}]]</p>
-
-<p>Quota de prêts : <span th:text="${quotaPret}"></span></p>
-<p>Quota de réservations : [[${quotaReservation}]]</p>
-<p>Nombre de réservations actives : [[${reservationsActives}]]</p>
-<p>Statut abonnement : [[${statutAbonnement}]]</p>
-<p>Statut pénalité : [[${statutPenalite}]]</p>
-
-<h3>Exemplaires disponibles</h3>
-<table border="1">
-    <tr>
-        <th>Livre</th>
-        <th>Code Barre</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="ex : ${exemplaires}">
-        <td th:text="${ex.livre.titre}"></td>
-        <td th:text="${ex.codeBarre}"></td>
-        <td><a th:href="@{'/user/reservations/ajouter/' + ${ex.id}}">Réserver</a></td>
-    </tr>
-</table>
 </body>
 </html>

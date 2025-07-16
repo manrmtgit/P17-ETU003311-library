@@ -26,8 +26,8 @@ CREATE TABLE statut_exemplaire
 (
     id          SERIAL PRIMARY KEY,
     description VARCHAR(50) CHECK ( description IN ('DISPONIBLE', 'PRETE', 'RESERVE')),
-    date_debut  DATE NOT NULL,
-    date_fin    DATE NOT NULL
+    date_debut  DATE DEFAULT CURRENT_DATE,
+    date_fin    DATE
 );
 
 -- TABLE exemplaire
@@ -60,7 +60,6 @@ CREATE TABLE adherent
     email          VARCHAR(100) UNIQUE NOT NULL,
     date_naissance DATE                NOT NULL,
     profil_id      INT REFERENCES profil (id),
-    utilisateur_id INT UNIQUE,
     CONSTRAINT age_check CHECK (date_naissance < CURRENT_DATE)
 );
 
@@ -78,7 +77,7 @@ CREATE TABLE abonnement
 CREATE TABLE utilisateur
 (
     id           SERIAL PRIMARY KEY,
-    adherent_id  INT REFERENCES adherent (id),
+    adherent_id  INT UNIQUE REFERENCES adherent (id),
     username     VARCHAR(100) UNIQUE NOT NULL,
     mot_de_passe TEXT                NOT NULL,
     role         VARCHAR(50) CHECK (role IN ('BIBLIOTHECAIRE', 'ADHERENT')),
@@ -112,8 +111,8 @@ CREATE TABLE statut_reservation
 (
     id          SERIAL PRIMARY KEY,
     description VARCHAR(50) NOT NULL CHECK ( description IN ('EN_ATTENTE', 'ACCEPTEE', 'REFUSEE', 'ANNULEE')),
-    date_debut  DATE        NOT NULL,
-    date_fin    DATE        NOT NULL
+    date_debut  DATE DEFAULT CURRENT_DATE,
+    date_fin    DATE
 );
 
 -- TABLE reservation

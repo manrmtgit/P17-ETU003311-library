@@ -12,7 +12,6 @@ import com.manoa.librarymanagement.repositories.action.PenaliteRepository;
 import com.manoa.librarymanagement.repositories.action.ReservationRepository;
 import com.manoa.librarymanagement.repositories.livre.ExemplaireRepository;
 import com.manoa.librarymanagement.repositories.statut.StatutReservationRepository;
-import com.manoa.librarymanagement.repositories.utilisateur.AdherentRepository;
 import com.manoa.librarymanagement.repositories.utilisateur.UtilisateurRepository;
 import com.manoa.librarymanagement.services.action.ReservationService;
 import lombok.RequiredArgsConstructor;

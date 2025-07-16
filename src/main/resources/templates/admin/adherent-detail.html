@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+<div th:replace="fragement/_menu-admin :: menu"></div>
+<h2>Détail adhérent</h2>
+<ul>
+    <li>Nom: <span th:text="${adherent.nom}"></span></li>
+    <li>Prénom: <span th:text="${adherent.prenom}"></span></li>
+    <li>Email: <span th:text="${adherent.email}"></span></li>
+    <li>Date de naissance: <span th:text="${adherent.dateNaissance}"></span></li>
+    <li>Profil: <span th:text="${adherent.profil != null ? adherent.profil.nom : 'Non défini'}"></span></li>
+    <li>Quota prêt: <span th:text="${adherent.profil != null ? adherent.profil.quotaPret : 'Non défini'}"></span></li>
+    <li>Quota réservation: <span th:text="${adherent.profil != null ? adherent.profil.quotaReservation : 'Non défini'}"></span></li>
+    <li>Jours pénalité: <span th:text="${adherent.profil != null ? adherent.profil.joursPenalite : 'Non défini'}"></span></li>
+</ul>
+<h3>Abonnements</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Date début</th>
+        <th>Date fin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ab : ${abonnements}">
+        <td th:text="${ab.dateDebut}"></td>
+        <td th:text="${ab.dateFin}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/admin/adherents}">Retour</a>
+</body>
+</html>

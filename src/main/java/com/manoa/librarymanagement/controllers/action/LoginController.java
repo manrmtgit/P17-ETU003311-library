@@ -19,9 +19,11 @@ public class LoginController {
 
     @GetMapping("/home")
     public String homeRedirect(Authentication auth, HttpSession session, Model model) {
-        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_BIBLIOTHECAIRE"))) {
+        if (auth.getAuthorities().stream().anyMatch(a ->
+                a.getAuthority().equals("ROLE_BIBLIOTHECAIRE"))) {
             return "redirect:/admin/dashboard";
-        } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADHERENT"))) {
+        } else if (auth.getAuthorities().stream().anyMatch(a ->
+                a.getAuthority().equals("ROLE_ADHERENT"))) {
             return "redirect:/user/dashboard";
         }
         return "redirect:/login";

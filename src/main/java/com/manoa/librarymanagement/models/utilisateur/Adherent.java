@@ -31,9 +31,6 @@ public class Adherent {
     @ManyToOne
     private Profil profil;
 
-    @OneToOne(mappedBy = "adherent")
-    private Utilisateur utilisateur;
-
     @OneToMany(mappedBy = "adherent")
     private List<Abonnement> abonnements;
 

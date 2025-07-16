@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="mg">
 <body>
-<div th:replace="fragement/_menu :: menu"></div>
+<div th:replace="fragement/_menu-admin :: menu"></div>
 <h2>Jours Fériés</h2>
 <form th:action="@{/admin/jours-feries/ajouter}" method="post" th:object="${nouveauJour}">
     <label>Date :</label>

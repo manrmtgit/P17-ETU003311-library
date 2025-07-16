@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <body>
-<div th:replace="fragement/_menu-admin :: menu"></div>
-<h2>Liste des prêts</h2>
+<div th:replace="fragement/_menu-user :: menu"></div>
+<h2>Mes prêts</h2>
 <table border="1">
     <thead>
     <tr>
         <th>ID</th>
-        <th>Adhérent</th>
         <th>Exemplaire</th>
         <th>Date prêt</th>
         <th>Date retour prévue</th>
@@ -17,16 +16,11 @@
     <tbody>
     <tr th:each="pret : ${prets}">
         <td th:text="${pret.id}"></td>
-        <td th:text="${pret.adherent.nom}"></td>
         <td th:text="${pret.exemplaire.codeBarre}"></td>
         <td th:text="${pret.datePret}"></td>
         <td th:text="${pret.dateRetourPrevue}"></td>
         <td>
-            <a th:href="@{'/admin/prets/' + ${pret.id}}">Voir</a>
-            <form th:action="@{'/admin/prets/' + ${pret.id} + '/retour'}" method="post" style="display:inline">
-                <button type="submit">Retour</button>
-            </form>
-            <form th:action="@{'/admin/prets/' + ${pret.id} + '/prolonger'}" method="post" style="display:inline">
+            <form th:action="@{'/admin/prets/' + ${pret.id} + '/prolonger-user'}" method="post" style="display:inline">
                 <input type="date" name="nouvelleDate" required>
                 <button type="submit">Prolonger</button>
             </form>
@@ -34,5 +28,6 @@
     </tr>
     </tbody>
 </table>
+<a th:href="@{/user/prets/demander-pret}">Faire une demande de prêt</a>
 </body>
 </html>
